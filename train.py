@@ -21,7 +21,7 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
 
     model = model.double()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f'Found device: {device} . Training will be done on {device}')
+    print(f'Found device: {device}. Training will be done on {device}')
     model.to(device)
 
     patience_counter = 0
@@ -78,11 +78,13 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
             patience_counter = 0
 
         if patience_counter == patience:
+            print('=' * 40)
             print('Early stoppling ...')
             break
 
     model_save_path = os.path.join(out_dir, f'best_model_{model_type}.pt')
     torch.save(model.state_dict(), model_save_path)
+    print(f'Model saved to {model_save_path}')
 
     return loss, best_train_acc, best_val_acc
 

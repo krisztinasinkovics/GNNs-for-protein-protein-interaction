@@ -31,8 +31,12 @@ def test(model, loader):
 
 
 if __name__ == "__main__":
-    # Load test data
+    # USER INPUT
     input_dir = '/gdrive/MyDrive/protein_mapping/ppi'
+    model_type = 'GAT'  # GCN is also available
+    model_path = '/content/best_model_GAT.pt'
+
+    # Load test data
     test_graph, test_graph_id, test_feats, test_labels = load_test_data(input_dir)
 
     # Preprocess test data
@@ -48,9 +52,6 @@ if __name__ == "__main__":
 
     # Create DataLoader
     test_loader = DataLoader(test_dataset, batch_size=2, shuffle=False)
-
-    model_type = 'GAT'  # GCN is also available
-    model_path = '/content/best_model_GAT.pt'
 
     if model_type == 'GAT':
         model = GATN(num_features=test_feats.shape[1], num_classes=test_labels.shape[1], hidden_dim=128, num_heads=3)
