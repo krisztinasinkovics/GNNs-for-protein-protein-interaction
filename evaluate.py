@@ -43,9 +43,9 @@ if __name__ == "__main__":
                         help='Directory where the date is present.')
 
     args = parser.parse_args()
-    input_dir = args.input_dir  # '/gdrive/MyDrive/protein_mapping/ppi'
-    model_type = args.model_type  # 'GAT'  # GCN is also available
-    model_path = args.model_path  # '/content/best_model_GAT.pt'
+    input_dir = args.input_dir
+    model_type = args.model_type
+    model_path = args.model_path
 
     # Load test data
     test_graph, test_graph_id, test_feats, test_labels = load_test_data(input_dir)

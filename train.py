@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     model_type = args.model_type
 
-    input_dir = args.input_dir  # '/gdrive/MyDrive/protein_mapping/ppi'
+    input_dir = args.input_dir
     output_dir = args.output_dir
 
     # Load train and valid data
