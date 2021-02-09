@@ -36,7 +36,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Evaluating GNN node classification for test set of PPI')
     parser.add_argument('--input_dir', type=str, required=True,
-                        help='Directory where the input data is present.')
+                        help='Directory where the unzipped input data is present.')
     parser.add_argument('--model_type', type=str, choices=('GAT', 'GCN'), default='GAT',
                         help='Choose between Graph Attention Network model or Graph Convolution Network model.')
     parser.add_argument('--model_path', type=str, default='saved_models/best_model_GAT.pt',

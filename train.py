@@ -97,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument('--model_type', type=str, choices=('GAT', 'GCN'), default='GAT',
                         help='Choose between Graph Attention Network architecture or Graph Convolution Network.')
     parser.add_argument('--input_dir', type=str, required=True,
-                        help='Directory where the input data is present.')
+                        help='Directory where the unzipped input data is present.')
     parser.add_argument('--output_dir', type=str, default='saved_models',
                         help='Directory where model file will be saved')
     args = parser.parse_args()
