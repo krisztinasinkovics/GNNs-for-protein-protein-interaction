@@ -1,4 +1,4 @@
-Exploration of Graph Attention Network architectures and Graph Convolution architectures 
+Exploration of Graph Attention Network architecture and Graph Convolution architecture 
 to classify nodes in Protein-Protein Interaction dataset.  
 Implemented in pytorch.  
 
