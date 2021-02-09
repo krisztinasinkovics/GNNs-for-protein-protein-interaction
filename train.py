@@ -21,6 +21,7 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
 
     model = model.double()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f'Found device: {device} . Training will be done on {device}')
     model.to(device)
 
     patience_counter = 0
@@ -67,7 +68,7 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
             print('*' * 40)
             print(f'Epoch:{epoch}')
             print(f'Train loss:{np.mean(loss_list):.4f}')
-            print(f'Train accuracy:{acc_train * 100:.2f}%, Validation accuracy:{acc_val * 100:.2f}%')
+            print(f'Train acc (F1 score):{acc_train * 100:.2f}%, Validation acc (F1 score):{acc_val * 100:.2f}%')
             print(f'Best train accuracy:{best_train_acc * 100:.2f}%')
             print(f'Best validation accuracy:{best_val_acc * 100:.2f}%')
 
@@ -97,6 +98,7 @@ if __name__ == "__main__":
     # Load train and valid data
     train_graph, train_graph_id, train_feats, train_labels = load_train_data(input_dir)
     valid_graph, valid_graph_id, valid_feats, valid_labels = load_valid_data(input_dir)
+    print('Train and validation data loaded.')
 
     # Preprocess train data
     list_train_nodes = get_node_list(train_graph, train_graph_id)
@@ -108,6 +110,7 @@ if __name__ == "__main__":
     train_dataset = []
     for g in list_train_graphs:
         train_dataset.append(torch_geometric.utils.from_networkx(g))
+    print('Train data preprocessed.')
 
     # Preprocess valid data
     list_valid_nodes = get_node_list(valid_graph, valid_graph_id)
@@ -119,11 +122,13 @@ if __name__ == "__main__":
     valid_dataset = []
     for g in list_valid_graphs:
         valid_dataset.append(torch_geometric.utils.from_networkx(g))
+    print('Validation data preprocessed.')
 
     # Create DataLoaders
     train_loader = DataLoader(train_dataset, batch_size=2, shuffle=False)
     valid_loader = DataLoader(valid_dataset, batch_size=2, shuffle=False)
 
+    print('Starting training.')
     train(model_type=model_type,
           num_features=train_feats.shape[1],
           num_classes=train_labels.shape[1],
