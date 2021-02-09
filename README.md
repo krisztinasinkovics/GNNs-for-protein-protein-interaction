@@ -2,6 +2,16 @@ Exploration of Graph Attention Network architectures and Graph Convolution archi
 to classify nodes in Protein-Protein Interaction dataset.  
 Implemented in pytorch.  
 
+## Requirements:
+List of packages is provided in the `requirements.txt` 
+To install pytorch-geometric run:
+```
+pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-1.7.0+${CUDA}.html
+pip install --no-index torch-sparse -f https://pytorch-geometric.com/whl/torch-1.7.0+${CUDA}.html
+pip install torch-geometric
+```
+where ${CUDA} should be replaced by either cpu, cu92, cu101, cu102, or cu110 depending on your PyTorch installation.  
+
 ### How to run:
 1. Install the requirements stated in the `requirements.txt`
 2. To run the train script use the following command:
