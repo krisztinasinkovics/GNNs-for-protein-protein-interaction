@@ -1,4 +1,5 @@
 import os
+import argparse
 import numpy as np
 import torch
 import torch_geometric
@@ -91,11 +92,20 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
 
 if __name__ == "__main__":
     # USER INPUT
-    model_type = 'GAT'  # Graph Attention Network
-    # model_type = 'GCN'  # Graph Convolutional Network
+    parser = argparse.ArgumentParser(
+        description='Training GNN node classification for Protein-Protein Interactions dataset.')
+    parser.add_argument('--model_type', type=str, choices=('GAT', 'GCN'), default='GAT',
+                        help='Choose between Graph Attention Network architecture or Graph Convolution Network.')
+    parser.add_argument('--input_dir', type=str, required=True,
+                        help='Directory where the input data is present.')
+    parser.add_argument('--output_dir', type=str, default='saved_models',
+                        help='Directory where model file will be saved')
+    args = parser.parse_args()
 
-    input_dir = '/gdrive/MyDrive/protein_mapping/ppi'
-    output_dir = 'saved_models'
+    model_type = args.model_type
+
+    input_dir = args.input_dir  # '/gdrive/MyDrive/protein_mapping/ppi'
+    output_dir = args.output_dir
 
     # Load train and valid data
     train_graph, train_graph_id, train_feats, train_labels = load_train_data(input_dir)

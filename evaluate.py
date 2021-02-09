@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import torch
 import torch_geometric
@@ -32,9 +33,19 @@ def test(model, loader):
 
 if __name__ == "__main__":
     # USER INPUT
-    input_dir = '/gdrive/MyDrive/protein_mapping/ppi'
-    model_type = 'GAT'  # GCN is also available
-    model_path = '/content/best_model_GAT.pt'
+    parser = argparse.ArgumentParser(
+        description='Evaluating GNN node classification for test set of PPI')
+    parser.add_argument('--input_dir', type=str, required=True,
+                        help='Directory where the input data is present.')
+    parser.add_argument('--model_type', type=str, choices=('GAT', 'GCN'), default='GAT',
+                        help='Choose between Graph Attention Network model or Graph Convolution Network model.')
+    parser.add_argument('--model_path', type=str, default='saved_models/best_model_GAT.pt',
+                        help='Directory where the date is present.')
+
+    args = parser.parse_args()
+    input_dir = args.input_dir  # '/gdrive/MyDrive/protein_mapping/ppi'
+    model_type = args.model_type  # 'GAT'  # GCN is also available
+    model_path = args.model_path  # '/content/best_model_GAT.pt'
 
     # Load test data
     test_graph, test_graph_id, test_feats, test_labels = load_test_data(input_dir)
