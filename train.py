@@ -18,7 +18,7 @@ def train(model_type, num_features, num_classes, train_loader, val_loader, num_e
         model = GCN(num_features=num_features, num_classes=num_classes, hidden_dim=128)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=5e-4)
-    criterion = torch.nn.BCEWithLogitsLoss()
+    criterion = torch.nn.BCELoss()
 
     model = model.double()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
